@@ -26,7 +26,7 @@ eval_echo "python --version"
 # create virtual environment
 eval_echo "pip install virtualenv"
 eval_echo "python -m virtualenv .virtualenv"
-eval_echo ". ./.virtualenv/Scripts/activate"
+eval_echo ". ./.virtualenv/bin/activate"
 if [ -n "$VIRTUAL_ENV" ]; then
     color "Virtual environment activated: $VIRTUAL_ENV" $green
 else

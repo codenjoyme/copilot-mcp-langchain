@@ -1,0 +1,9 @@
+{
+    "servers": {
+      "langchain-mcp":{
+          "type": "stdio",
+          "command": "${workspaceFolder}/.virtualenv/bin/python",
+          "args": ["${workspaceFolder}/mcp_server/server.py"]
+      }
+    }
+} 

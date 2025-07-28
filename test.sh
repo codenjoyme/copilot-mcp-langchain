@@ -9,7 +9,7 @@
 ####################################
 ### activate virtual environment ###
 ####################################
-. ./.virtualenv/Scripts/activate
+. ./.virtualenv/bin/activate
 
 ############################################################
 ### to check connection to the OpenAI/Azure LLM provider ###
