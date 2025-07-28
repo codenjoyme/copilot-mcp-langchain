@@ -2,3 +2,9 @@ __pycache__
 mcp_server/logs/mcp_server.log
 work
 .env
+# User-specific MCP configurations
+.vscode/mcp.json
+.cursor/mcp.json
+
+# Screenshot test outputs
+mcp_server/screenshot/
