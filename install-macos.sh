@@ -43,11 +43,9 @@ if ! command -v python3 &> /dev/null; then
     exit 1
 fi
 
-# Use python3 explicitly on macOS
+# Use python3 explicitly on macOS with built-in venv (modern approach)
 color "📦 Creating virtual environment..." $green
-eval_echo "python3 -m pip install --upgrade pip"
-eval_echo "python3 -m pip install virtualenv"
-eval_echo "python3 -m virtualenv .virtualenv"
+eval_echo "python3 -m venv .virtualenv"
 eval_echo "source ./.virtualenv/bin/activate"
 
 if [ -n "$VIRTUAL_ENV" ]; then
