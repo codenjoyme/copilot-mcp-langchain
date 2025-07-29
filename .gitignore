@@ -6,3 +6,9 @@ mcp_server/logs/hotkey_service.log
 mcp_server/logs/hotkey_core.log
 work
 .env
+# User-specific MCP configurations
+.vscode/mcp.json
+.cursor/mcp.json
+
+# Screenshot test outputs
+mcp_server/screenshot/

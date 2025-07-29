@@ -40,15 +40,27 @@ With this setup, `GitHub Copilot` gains access to new, well-documented tools tha
 
 - **mcp.json**
   ```json
-    {
-      "servers": {
-        "langchain-mcp":{
-            "type": "stdio",
-            "command": "${workspaceFolder}\\langchain_env\\Scripts\\python.exe",
-            "args": ["${workspaceFolder}\\mcp_server\\server.py"]
-        }
+      // Windows (use .vscode/mcp.json):
+  {
+    "servers": {
+      "langchain-mcp":{
+          "type": "stdio",
+          "command": "${workspaceFolder}\\.virtualenv\\Scripts\\python.exe",
+          "args": ["${workspaceFolder}\\mcp_server\\server.py"]
       }
     }
+  }
+  
+  // macOS/Linux (use .vscode/mcp-macos.json):
+  {
+    "servers": {
+      "langchain-mcp":{
+          "type": "stdio",
+          "command": "${workspaceFolder}/.virtualenv/bin/python",
+          "args": ["${workspaceFolder}/mcp_server/server.py"]
+      }
+    }
+  }
   ```
 
 - **Custom Langchain Tools**:
@@ -91,12 +103,26 @@ While LLMs can handle simple tasks, more complex operations like processing Exce
 
 ## Getting Started
 
+### 🪟 Windows Setup
 1. Clone this repository
-2. Set up your environment variables in a `.env` file
-3. Install `Python` dependencies as described in `install.sh`
-4. Configure `.vscode/mcp.json` for your MCP server
+2. Run `install.ps1` (PowerShell) or `install.sh` (Git Bash/WSL)
+3. Copy `env.template` to `.env` and configure your API keys
+4. Use `.vscode/mcp.json` or `.cursor/mcp.json` (Windows paths)
 5. Configure MCP settings in VS Code (see MCP Configuration section below)
-6. Start using the enhanced `GitHub Copilot` capabilities
+
+### 🍎 macOS Setup
+1. Clone this repository
+2. Run `./install-macos.sh` (recommended) or `pwsh ./install.ps1`
+3. Copy `env.template` to `.env` and configure your API keys
+4. Use `.vscode/mcp-macos.json` or `.cursor/mcp-macos.json` (Unix paths)
+5. See detailed instructions in [SETUP-MACOS.md](SETUP-MACOS.md)
+
+### 🐧 Linux Setup
+Similar to macOS - use the fixed `install.sh` or PowerShell script
+
+### 🚀 Start Using
+6. Configure MCP settings in VS Code/Cursor
+7. Start using the enhanced `GitHub Copilot` capabilities
 
 ## MCP Configuration
 
