@@ -205,6 +205,27 @@ python -m mcp_server.run run lng_webhook_server '{\"operation\":\"stop\",\"name\
 # Universal test suite (comprehensive testing)
 cd mcp_server/tools/lng_webhook_server/stuff && python test_webhook_universal.py && cd ../../../../
 
+#############################
+### lng_javascript_add    ###
+### lng_javascript_exec   ###
+#############################
+# JavaScript execution tools for storing and running JavaScript functions
+
+# Store a simple function
+python -m mcp_server.run run lng_javascript_add '{\"function_name\":\"add_numbers\",\"function_code\":\"function add_numbers(a, b) { console.log(\\\"Adding:\\\", a, b); return a + b; }\"}'
+
+# Execute the function with simple parameters
+python -m mcp_server.run run lng_javascript_exec '{\"function_name\":\"add_numbers\",\"parameters\":\"{\\\"a\\\":5,\\\"b\\\":3}\"}'
+
+# Store a complex function that works with objects
+python -m mcp_server.run run lng_javascript_add '{\"function_name\":\"process_objects\",\"function_code\":\"function process_objects(config, data) { console.log(\\\"Processing data:\\\", JSON.stringify(data)); console.log(\\\"Config:\\\", JSON.stringify(config)); return { items: data.items, sorted: config.sort, count: data.items.length }; }\"}'
+
+# Execute with complex parameters (note alphabetical key order: config, data)
+python -m mcp_server.run run lng_javascript_exec '{\"function_name\":\"process_objects\",\"parameters\":\"{\\\"data\\\":{\\\"items\\\":[1,2,3]},\\\"config\\\":{\\\"sort\\\":true}}\"}'
+
+# Test parameter ordering with different JSON key order
+python -m mcp_server.run run lng_javascript_exec '{\"function_name\":\"add_numbers\",\"parameters\":\"{\\\"b\\\":10,\\\"a\\\":5}\"}'
+
 ########################
 ### clean all caches ###
 ########################

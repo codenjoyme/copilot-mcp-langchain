@@ -1,0 +1,4 @@
+enabled: true
+description: "Load and execute stored JavaScript functions"
+dependencies: 
+  - py-mini-racer

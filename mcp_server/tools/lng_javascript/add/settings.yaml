@@ -1,0 +1,4 @@
+enabled: true
+description: "Store JavaScript functions for later execution"
+dependencies: 
+  - py-mini-racer

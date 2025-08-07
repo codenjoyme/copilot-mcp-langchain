@@ -44,6 +44,9 @@ eval_echo "pip install python-dotenv PyYAML"
 # install FastAPI and Uvicorn for HTTP server
 eval_echo "pip install fastapi uvicorn requests"
 
+# install py-mini-racer for JavaScript execution tools (lng_javascript_add, lng_javascript_exec)
+eval_echo "pip install py-mini-racer"
+
 # Tool-specific dependencies are now managed via `settings.yaml` files.
 # Run this to install dependencies for enabled tools:
 eval_echo "python -m mcp_server.run install_dependencies"
