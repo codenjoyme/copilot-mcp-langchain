@@ -1,0 +1,3 @@
+enabled: true
+description: "JSON to CSV/Markdown converter with pandas support for complex nested structures"
+dependencies: ["pandas"]
