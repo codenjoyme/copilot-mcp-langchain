@@ -8,5 +8,6 @@ mcp_server/prompts
 mcp_server/hotkeys
 mcp_server/webhooks
 mcp_server/logs/webhook
+mcp_server/javascript/*.js
 work
 .env

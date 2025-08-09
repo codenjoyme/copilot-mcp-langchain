@@ -1,0 +1,3 @@
+enabled: true
+description: "JavaScript function management and execution with PyMiniRacer"
+dependencies: ["py-mini-racer"]

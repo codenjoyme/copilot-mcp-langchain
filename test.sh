@@ -219,6 +219,44 @@ python -m mcp_server.run run lng_webhook_server '{\"operation\":\"stop\",\"name\
 # Universal test suite (comprehensive testing)
 cd mcp_server/tools/lng_webhook_server/stuff && python test_webhook_universal.py && cd ../../../../
 
+######################
+### lng_javascript ###
+######################
+# JavaScript function management and execution with PyMiniRacer
+
+# List all saved JavaScript functions (initially empty)
+python -m mcp_server.run run lng_javascript '{\"command\": \"list\"}'
+
+# Save a simple greeting function
+python -m mcp_server.run run lng_javascript '{\"command\": \"add\", \"function_name\": \"greet\", \"function_code\": \"function greet(params) { return \\\"Hello, \\\" + params; }\"}'
+
+# Save a mathematical calculation function
+python -m mcp_server.run run lng_javascript '{\"command\": \"add\", \"function_name\": \"calculateSum\", \"function_code\": \"function calculateSum(params) { return params.a + params.b; }\"}'
+
+# Save a complex calculation function with destructuring and array methods
+python -m mcp_server.run run lng_javascript '{\"command\": \"add\", \"function_name\": \"complexCalc\", \"function_code\": \"function complexCalc(params) { const { numbers, operation } = params; if (operation === \\\"sum\\\") return numbers.reduce((a, b) => a + b, 0); if (operation === \\\"product\\\") return numbers.reduce((a, b) => a * b, 1); return \\\"Invalid operation\\\"; }\"}'
+
+# List all saved functions after adding them
+python -m mcp_server.run run lng_javascript '{\"command\": \"list\"}'
+
+# Execute greeting function with string parameter
+python -m mcp_server.run run lng_javascript '{\"command\": \"execute\", \"function_name\": \"greet\", \"parameters\": \"World\"}'
+
+# Execute sum function with JSON parameters
+python -m mcp_server.run run lng_javascript '{\"command\": \"execute\", \"function_name\": \"calculateSum\", \"parameters\": \"{\\\"a\\\": 5, \\\"b\\\": 3}\"}'
+
+# Execute complex function with array sum operation
+python -m mcp_server.run run lng_javascript '{\"command\": \"execute\", \"function_name\": \"complexCalc\", \"parameters\": \"{\\\"numbers\\\": [1, 2, 3, 4], \\\"operation\\\": \\\"sum\\\"}\"}'
+
+# Execute complex function with array product operation
+python -m mcp_server.run run lng_javascript '{\"command\": \"execute\", \"function_name\": \"complexCalc\", \"parameters\": \"{\\\"numbers\\\": [2, 3, 4], \\\"operation\\\": \\\"product\\\"}\"}'
+
+# Test error handling - trying to execute non-existent function
+python -m mcp_server.run run lng_javascript '{\"command\": \"execute\", \"function_name\": \"nonexistent\", \"parameters\": \"test\"}'
+
+# Test error handling - trying to add arrow function (should fail)
+python -m mcp_server.run run lng_javascript '{\"command\": \"add\", \"function_name\": \"arrowTest\", \"function_code\": \"const arrowTest = () => { return 1; }\"}'
+
 ########################
 ### clean all caches ###
 ########################
