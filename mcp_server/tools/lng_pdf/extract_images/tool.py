@@ -149,9 +149,23 @@ async def run_tool(name: str, parameters: dict) -> list[types.Content]:
         # Open PDF file
         try:
             doc = fitz.open(pdf_path)
+            
+            # Check if PDF is encrypted/password-protected
+            if doc.needs_pass:
+                doc.close()
+                error_metadata = {
+                    "operation": "pdf_extract_images",
+                    "pdf_path": pdf_path,
+                    "success": False,
+                    "error": "PDF is password-protected and requires a password to access",
+                    "error_type": "password_protected"
+                }
+                result = json.dumps({"metadata": error_metadata}, indent=2)
+                return [types.TextContent(type="text", text=result)]
+                
         except Exception as e:
             error_str = str(e).lower()
-            if "password" in error_str or "decrypt" in error_str or "authentication" in error_str:
+            if "password" in error_str or "decrypt" in error_str or "authentication" in error_str or "encrypted" in error_str:
                 error_metadata = {
                     "operation": "pdf_extract_images",
                     "pdf_path": pdf_path,
