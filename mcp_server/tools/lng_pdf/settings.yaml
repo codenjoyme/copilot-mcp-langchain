@@ -1,0 +1,4 @@
+enabled: true
+description: "PDF processing tools - extract images, text and metadata from PDF files"
+dependencies: 
+  - PyMuPDF  # For PDF processing and image extraction

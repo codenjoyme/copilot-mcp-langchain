@@ -527,6 +527,75 @@ python -m mcp_server.run run lng_file_list '{\"pattern\":\"*.txt\"}'
 # Clean up test directory
 rm -rf test_list_dir
 
+##########################
+### lng_pdf_extract_images ###
+##########################
+# PDF image extraction tool with PyMuPDF - extracts all images from PDF files
+
+# Create a test PDF with embedded images for demonstration
+echo "Creating test PDF with embedded images..."
+mkdir -p /tmp/pdf_test_demo
+python3 << 'EOF'
+import fitz  # PyMuPDF
+from PIL import Image, ImageDraw
+import os
+
+# Create test images
+img1 = Image.new('RGB', (200, 150), color='lightblue')
+draw1 = ImageDraw.Draw(img1)
+draw1.rectangle([10, 10, 50, 50], fill='red', outline='black')
+draw1.text((10, 100), "Test Image 1", fill='black')
+img1.save('/tmp/pdf_test_demo/test_img1.png')
+
+img2 = Image.new('RGB', (150, 100), color='lightgreen')
+draw2 = ImageDraw.Draw(img2)
+draw2.ellipse([20, 20, 130, 80], fill='purple', outline='white')
+draw2.text((30, 40), "Image 2", fill='white')
+img2.save('/tmp/pdf_test_demo/test_img2.png')
+
+# Create PDF with embedded images
+doc = fitz.open()
+page1 = doc.new_page(width=595, height=842)
+page1.insert_text((50, 50), "Test PDF - Page 1", fontsize=16)
+page1.insert_image(fitz.Rect(50, 100, 250, 250), filename='/tmp/pdf_test_demo/test_img1.png')
+
+page2 = doc.new_page(width=595, height=842)
+page2.insert_text((50, 50), "Test PDF - Page 2", fontsize=16)
+page2.insert_image(fitz.Rect(100, 100, 250, 200), filename='/tmp/pdf_test_demo/test_img2.png')
+
+doc.save('/tmp/pdf_test_demo/sample_document.pdf')
+doc.close()
+print("Test PDF created: /tmp/pdf_test_demo/sample_document.pdf")
+EOF
+
+echo "Testing PDF image extraction..."
+
+# Basic extraction - extracts to same directory as PDF
+python -m mcp_server.run run lng_pdf_extract_images '{"pdf_path":"/tmp/pdf_test_demo/sample_document.pdf"}'
+
+# Custom output directory and prefix
+mkdir -p /tmp/pdf_extracted
+python -m mcp_server.run run lng_pdf_extract_images '{"pdf_path":"/tmp/pdf_test_demo/sample_document.pdf","output_directory":"/tmp/pdf_extracted","image_prefix":"extracted_img"}'
+
+# Test error handling - non-existent PDF file
+python -m mcp_server.run run lng_pdf_extract_images '{"pdf_path":"/tmp/nonexistent.pdf"}'
+
+# Test error handling - missing pdf_path parameter
+python -m mcp_server.run run lng_pdf_extract_images '{}'
+
+# Test error handling - directory instead of file
+python -m mcp_server.run run lng_pdf_extract_images '{"pdf_path":"/tmp/pdf_test_demo"}'
+
+# Display extracted images
+echo "=== Extracted images in default location ==="
+ls -la /tmp/pdf_test_demo/*.png
+
+echo "=== Extracted images in custom location ==="
+ls -la /tmp/pdf_extracted/
+
+# Clean up test files
+rm -rf /tmp/pdf_test_demo /tmp/pdf_extracted
+
 ########################
 ### clean all caches ###
 ########################
