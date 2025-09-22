@@ -120,5 +120,5 @@ Or use the system test suite:
 
 ```bash
 # See test.sh for lng_xls_batch test examples
-./test.sh
+./mcp_server/build/test.sh
 ```

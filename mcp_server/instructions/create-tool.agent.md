@@ -13,4 +13,4 @@
 - If the tool (or group) is complex - you can create a `readme.md` file.
 - When creating `readme.md` don't overuse details, only useful things in essence, like how `stuff` scripts are used.
 - If useful scripts were created to test the tool and their usefulness is justified, create a `stuff` folder next to `tool.py` or a level higher in the category if the tools group is linked through this `stuff`.
-- Also add examples of how to use the new tool in `./test.sh`.
+- Also add examples of how to use the new tool in `./mcp_server/build/test.sh`.
