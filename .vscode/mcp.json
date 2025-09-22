@@ -5,6 +5,16 @@
           "command": "${workspaceFolder}\\.virtualenv\\Scripts\\python.exe",
           "args": ["${workspaceFolder}\\mcp_server\\server.py"]
       },
+    //   "langchain-mcp-docker-windows": {
+    //       "type": "stdio",
+    //       "command": "powershell.exe",
+    //       "args": ["-File", "${workspaceFolder}\\mcp_server\\docker\\run.ps1", "${workspaceFolder}\\.env"]
+    //   },
+    //   "langchain-mcp-docker-linux": {
+    //       "type": "stdio",
+    //       "command": "${workspaceFolder}\\..\\tools\\git\\bin\\bash.exe",
+    //       "args": ["-c", "cd '${workspaceFolder}' && ./mcp_server/docker/run.sh '${workspaceFolder}/.env'"]
+    //   },
       "github": {
           "type": "http",
           "url": "https://api.githubcopilot.com/mcp/"
